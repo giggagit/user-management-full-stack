@@ -1,0 +1,45 @@
+<form *ngIf="user;else notFound" #detailsForm="ngForm" (ngSubmit)="onSubmit(detailsForm)">
+  <div class="form-group row">
+    <label for="username" class="col-2 col-form-label">Username</label>
+    <div class="col-10">
+      <input type="text" class="form-control"
+        [ngClass]="{ 'is-invalid': username.invalid && (username.dirty || username.touched) && (detailsForm.submitted || isDuplicate) }"
+        id="username" ngModel="{{ user?.username }}" name="username" #username="ngModel" required />
+      <div *ngIf="username.invalid && ((username.dirty || username.touched) || detailsForm.submitted)"
+        class="invalid-feedback">
+        Username is required!
+      </div>
+      <div *ngIf="isDuplicate" class="invalid-feedback">
+        Username is duplicate!
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="firstname" class="col-2 col-form-label">First Name</label>
+    <div class="col-10">
+      <input type="text" class="form-control"
+        [ngClass]="{ 'is-invalid': firstname.invalid && (firstname.dirty || firstname.touched || detailsForm.submitted) }"
+        id="firstname" ngModel="{{ user?.firstname }}" name="firstname" #firstname="ngModel" required />
+      <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched || detailsForm.submitted)"
+        class="invalid-feedback">
+        First name is required!
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="lastname" class="col-2 col-form-label">Last Name</label>
+    <div class="col-10">
+      <input type="text" class="form-control"
+        [ngClass]="{ 'is-invalid': lastname.invalid && (lastname.dirty || lastname.touched || detailsForm.submitted) }"
+        id="lastname" ngModel="{{ user?.lastname }}" name="lastname" #lastname="ngModel" required />
+    </div>
+  </div>
+
+  <div class="float-right">
+    <button (click)="backClick()" type="button" class="btn btn-danger">Back</button>&nbsp;
+    <button (click)="detailsForm.reset()" type="button" class="btn btn-warning">Reset</button>&nbsp;
+    <button type="submit" class="btn btn-primary" [disabled]="detailsForm.invalid">Update</button>
+  </div>
+</form>
+
+<ng-template #notFound>User not found!</ng-template>

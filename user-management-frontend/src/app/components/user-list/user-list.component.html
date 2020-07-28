@@ -1,0 +1,30 @@
+<div class="row">
+  <table class="table">
+    <thead class="text-center">
+      <tr>
+        <th cope="col">#</th>
+        <th cope="col">Username</th>
+        <th cope="col">First Name</th>
+        <th cope="col">Last Name</th>
+        <th cope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td class="text-center">
+          <button (click)="onDelete(i, user.id)" type="button" class="btn btn-danger">Delete</button>&nbsp;
+          <a routerLink="/users/{{ user.id }}" name="edit-user" id="edit-user" class="btn btn-primary"
+            role="button">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="float-right">
+  <a routerLink="/create" name="create-user" id="create-user" class="btn btn-primary" role="button">Create</a>
+</div>

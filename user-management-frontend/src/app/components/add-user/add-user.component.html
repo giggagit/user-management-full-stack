@@ -1,0 +1,46 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <div class="form-group row">
+    <label for="username" class="col-2 col-form-label">Username</label>
+    <div class="col-10">
+      <input type="text" class="form-control"
+        [ngClass]="{ 'is-invalid': username.invalid && (username.dirty || username.touched) && (userForm.submitted || isDuplicate) }"
+        id="username" ngModel name="username" #username="ngModel" required />
+      <div *ngIf="username.invalid && ((username.dirty || username.touched) || userForm.submitted)"
+        class="invalid-feedback">
+        Username is required!
+      </div>
+      <div *ngIf="isDuplicate" class="invalid-feedback">
+        Username is duplicate!
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="firstname" class="col-2 col-form-label">First Name</label>
+    <div class="col-10">
+      <input type="text" class="form-control"
+        [ngClass]="{ 'is-invalid': firstname.invalid && (firstname.dirty || firstname.touched || userForm.submitted) }"
+        id="firstname" ngModel name="firstname" #firstname="ngModel" required />
+      <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched || userForm.submitted)"
+        class="invalid-feedback">
+        First name is required!
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="lastname" class="col-2 col-form-label">Last Name</label>
+    <div class="col-10">
+      <input type="text" class="form-control"
+        [ngClass]="{ 'is-invalid': lastname.invalid && (lastname.dirty || lastname.touched || userForm.submitted) }"
+        id="lastname" ngModel name="lastname" #lastname="ngModel" required />
+      <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched || userForm.submitted)"
+        class="invalid-feedback">
+        Last name is required!
+      </div>
+    </div>
+  </div>
+  <div class="float-right">
+    <button (click)="backClick()" type="button" class="btn btn-danger">Back</button>&nbsp;
+    <button (click)="userForm.reset()" type="button" class="btn btn-warning">Reset</button>&nbsp;
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Create</button>
+  </div>
+</form>
