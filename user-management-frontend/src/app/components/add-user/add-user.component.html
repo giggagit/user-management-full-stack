@@ -3,7 +3,7 @@
     <label for="username" class="col-2 col-form-label">Username</label>
     <div class="col-10">
       <input type="text" class="form-control"
-        [ngClass]="{ 'is-invalid': username.invalid && (username.dirty || username.touched) && (userForm.submitted || isDuplicate) }"
+        [ngClass]="{ 'is-invalid': (username.invalid && (username.dirty || username.touched)) || (userForm.submitted && isDuplicate) }"
         id="username" ngModel name="username" #username="ngModel" required />
       <div *ngIf="username.invalid && ((username.dirty || username.touched) || userForm.submitted)"
         class="invalid-feedback">
